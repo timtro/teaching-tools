@@ -1,0 +1,55 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+SIDs	../rdmSeatingGenerator.py	/^SIDs=[]$/;"	kind:variable	line:30
+args	../csv-histogram.py	/^    args = parser.parse_args()$/;"	kind:variable	line:74
+args	../csv-merge.py	/^    args = parser.parse_args()$/;"	kind:variable	line:28
+args	../grade-analyser.py	/^    args = parser.parse_args()$/;"	kind:variable	line:74
+args	../rdmSeatingGenerator.py	/^args = parser.parse_args()$/;"	kind:variable	line:22
+csv-histogram.py	../csv-histogram.py	1;"	kind:file	line:1
+csv-merge.py	../csv-merge.py	1;"	kind:file	line:1
+csvr	../rdmSeatingGenerator.py	/^	csvr = csv.reader(csvfd, dialect='excel')$/;"	kind:variable	line:32
+csvw	../rdmSeatingGenerator.py	/^	csvw = csv.writer(f, dialect='excel')$/;"	kind:variable	line:69
+default	../rdmSeatingGenerator.py	/^				   default='placecards.tex',$/;"	kind:variable	line:16
+default	../rdmSeatingGenerator.py	/^				   default=None,$/;"	kind:variable	line:10
+default	../rdmSeatingGenerator.py	/^				   default=None,$/;"	kind:variable	line:13
+default	../rdmSeatingGenerator.py	/^				   default=None,$/;"	kind:variable	line:19
+description	../csv-histogram.py	/^        description='Plot a histogram from a column of a csv file.')$/;"	kind:variable	line:65
+description	../csv-merge.py	/^        description='Plot a histogram from a column of a csv file.')$/;"	kind:variable	line:21
+description	../grade-analyser.py	/^        description='Plot a histogram from a column of a csv file.')$/;"	kind:variable	line:65
+fit_normal	../csv-histogram.py	/^def fit_normal(data, colour='k', scalef=1):$/;"	kind:function	line:56
+fit_normal	../grade-analyser.py	/^def fit_normal(data, colour='k', scalef=1):$/;"	kind:function	line:56
+givennames	../rdmSeatingGenerator.py	/^givennames=[]$/;"	kind:variable	line:29
+grade-analyser.py	../grade-analyser.py	1;"	kind:file	line:1
+help	../csv-histogram.py	/^                        help='Name of column to plot in CSV file')$/;"	kind:variable	line:69
+help	../csv-histogram.py	/^                        help='Number of bins in histogram')$/;"	kind:variable	line:71
+help	../csv-histogram.py	/^                        help='Path to CSV file')$/;"	kind:variable	line:67
+help	../csv-merge.py	/^                        help='Index column name. (Must be same in all files.)')$/;"	kind:variable	line:27
+help	../csv-merge.py	/^                        help='Path to CSV file')$/;"	kind:variable	line:23
+help	../csv-merge.py	/^                        help='Path to combined CSV file output')$/;"	kind:variable	line:25
+help	../grade-analyser.py	/^                        help='Name of column to plot in CSV file')$/;"	kind:variable	line:69
+help	../grade-analyser.py	/^                        help='Number of bins in histogram')$/;"	kind:variable	line:71
+help	../grade-analyser.py	/^                        help='Path to CSV file')$/;"	kind:variable	line:67
+help	../rdmSeatingGenerator.py	/^				   help='Destination for manifest.')$/;"	kind:variable	line:14
+help	../rdmSeatingGenerator.py	/^				   help='Destination for texfile. Run through pdflatex.')$/;"	kind:variable	line:17
+help	../rdmSeatingGenerator.py	/^				   help='Path to class list.')$/;"	kind:variable	line:11
+help	../rdmSeatingGenerator.py	/^				   help='Seed for random number generator. Can be any hashabe object.')$/;"	kind:variable	line:20
+main	../csv-histogram.py	/^def main(csvFile, colName, bins=None, rng=None):$/;"	kind:function	line:12
+main	../csv-merge.py	/^def main(csvFiles, outfile, index=None):$/;"	kind:function	line:8
+main	../grade-analyser.py	/^def main(csvFile, colName, bins=None, rng=None):$/;"	kind:function	line:12
+make_histogram	../csv-histogram.py	/^def make_histogram(data, min=None, max=None, bins=None, colour='k', alpha=.65):$/;"	kind:function	line:25
+make_histogram	../grade-analyser.py	/^def make_histogram(data, min=None, max=None, bins=None, colour='k', alpha=.65):$/;"	kind:function	line:25
+modfour	../rdmSeatingGenerator.py	/^modfour = numberOfEntries % 4$/;"	kind:variable	line:59
+numberOfEntries	../rdmSeatingGenerator.py	/^numberOfEntries = len(SIDs)$/;"	kind:variable	line:56
+parser	../csv-histogram.py	/^    parser = argparse.ArgumentParser($/;"	kind:variable	line:64
+parser	../csv-merge.py	/^    parser = argparse.ArgumentParser($/;"	kind:variable	line:20
+parser	../grade-analyser.py	/^    parser = argparse.ArgumentParser($/;"	kind:variable	line:64
+parser	../rdmSeatingGenerator.py	/^parser = argparse.ArgumentParser(description='Reads the first three cols of a CSV classlist and generates seating cards and a CSV seating manifest.')$/;"	kind:variable	line:7
+print_stats	../csv-histogram.py	/^def print_stats(data):$/;"	kind:function	line:49
+print_stats	../grade-analyser.py	/^def print_stats(data):$/;"	kind:function	line:49
+rdmSeatingGenerator.py	../rdmSeatingGenerator.py	1;"	kind:file	line:1
+seatNumbers	../rdmSeatingGenerator.py	/^seatNumbers = random.sample(range(1,numberOfEntries+1), numberOfEntries)$/;"	kind:variable	line:57
+surnames	../rdmSeatingGenerator.py	/^surnames=[]$/;"	kind:variable	line:28
