@@ -1,18 +1,27 @@
-#!/usr/bin/env python
-# -*- coding: utf-8  -*-
+#!/usr/bin/env python3
 
-from gi.repository import Gtk, Gdk, GObject
+import argparse
+from enum import Enum
 import datetime as dt
 from time import strftime
 
-now = dt.datetime.now()
-duration = dt.timedelta(minutes=60)
-endTime = duration + now
-timeRemains = 0
+from gi.repository import Gtk, Gdk, GObject
 
 
-class Clock:
-    def __init__(self):
+class State(Enum):
+    PAUSED = 0
+    RUNNING = 1
+
+
+class ClockWindow:
+
+    def __init__(self, duration):
+
+        self.timeRemains = duration
+        self.timeOfLastCall = dt.datetime.now()
+
+        self.state = State.PAUSED
+
         self.win = Gtk.Window()
         self.win.connect("delete-event", Gtk.main_quit)
         self.win.set_title("Clock")
@@ -39,18 +48,30 @@ class Clock:
         return None
 
     def update(self):
-        timeRemains = endTime - dt.datetime.now()
+        if self.state is State.RUNNING:
+            now = dt.datetime.now()
+            self.timeRemains -= now - self.timeOfLastCall
+            self.timeOfLastCall = now
+
         self.timetext.set_markup(
             "Current Time:\n<span size='98000'>" + strftime('%H:%M') + "</span>")
         self.remainstext.set_markup("Time Remaining:\n<span size='98000'>" + '{0:02d}'.format(
-            timeRemains.seconds // 3600) + ':' + '{0:02d}'.format((timeRemains.seconds // 60) % 60) + "</span>")
-        self.progressbar.set_fraction(timeRemains.seconds / duration.seconds)
+            self.timeRemains.seconds // 3600) + ':' + '{0:02d}'.format((self.timeRemains.seconds // 60) % 60) + "</span>")
+        self.progressbar.set_fraction(
+            self.timeRemains.seconds / duration.seconds)
 
         # As this is a timeout function, return True so that it
         # continues to get called
         return True
 
-    def toggleWinBW(self):
+    def toggle_pause(self):
+        if self.state == State.PAUSED:
+            self.state = State.RUNNING
+            self.timeOfLastCall = dt.datetime.now()
+        else:
+            self.state = State.PAUSED
+
+    def toggle_black_and_white(self):
         if self.BW == True:
             self.BW = False
             self.timetext.modify_fg(Gtk.StateFlags.NORMAL, None)
@@ -139,7 +160,9 @@ def on_key_press_event(widget, event):
     keyname = Gdk.keyval_name(event.keyval)
     print("Key %s (%d) was pressed" % (keyname, event.keyval))
     if keyname == 'c':
-        Clock.toggleWinBW(clock)
+        ClockWindow.toggle_black_and_white(clockWin)
+    if keyname == 'p':
+        ClockWindow.toggle_pause(clockWin)
     if keyname == 'o':
         owin = EntryWindow()
         owin.show_all()
@@ -151,9 +174,21 @@ def undoBWColor(X):
 
 
 if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(
+        description='A simple timer to be projected on screen during an academic examination.')
+    parser.add_argument('-m', '--mins', type=int,
+                        help='Exam duration in minutes.')
+    args = parser.parse_args()
+
+    # now = dt.datetime.now()
+    duration = dt.timedelta(minutes=args.mins)
+
     settings = Gtk.Settings.get_default()
     settings.set_property("gtk-application-prefer-dark-theme", True)
-    clock = Clock()
+
+    clockWin = ClockWindow(duration)
+
     # add to the main loop scheduled tasks
-    GObject.timeout_add(200, clock.update)
+    GObject.timeout_add(200, clockWin.update)
     Gtk.main()
