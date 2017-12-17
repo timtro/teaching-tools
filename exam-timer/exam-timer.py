@@ -17,7 +17,6 @@ endedColour = "#FF9090"
 class State(Enum):
     PAUSED = 0
     RUNNING = 1
-    ENDED = 2
 
 
 class ClockWindow:
@@ -115,6 +114,8 @@ class ClockWindow:
 
     def add_time(self, delta):
         self.timeRemains += delta
+        if self.originalDuration < self.timeRemains:
+            self.originalDuration = self.timeRemains
 
     def deduct_time(self, delta):
         if self.timeRemains > delta:
