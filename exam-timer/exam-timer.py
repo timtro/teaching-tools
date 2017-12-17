@@ -113,14 +113,29 @@ class ClockWindow:
                 Gtk.StateFlags.NORMAL, Gdk.RGBA(0.0, 0.0, 0.0, 1.0))
             self.BW = True
 
+    def add_time(self, delta):
+        self.timeRemains += delta
+
+    def deduct_time(self, delta):
+        if self.timeRemains > delta:
+            self.timeRemains -= delta
+
 
 def on_key_press_event(widget, event):
     keyname = Gdk.keyval_name(event.keyval)
-    print("Key %s (%d) was pressed" % (keyname, event.keyval))
+    # print("Key %s (%d) was pressed" % (keyname, event.keyval))
     if keyname == 'c':
         ClockWindow.toggle_black_and_white(clockWin)
-    if keyname == 'p':
+    elif event.keyval == Gdk.KEY_space:
         ClockWindow.toggle_pause(clockWin)
+    elif event.keyval == Gdk.KEY_Left and (event.state & Gdk.ModifierType.CONTROL_MASK):
+        ClockWindow.add_time(clockWin, dt.timedelta(seconds=1))
+    elif event.keyval == Gdk.KEY_Right and (event.state & Gdk.ModifierType.CONTROL_MASK):
+        ClockWindow.deduct_time(clockWin, dt.timedelta(seconds=1))
+    elif event.keyval == Gdk.KEY_Up and (event.state & Gdk.ModifierType.CONTROL_MASK):
+        ClockWindow.add_time(clockWin, dt.timedelta(minutes=1))
+    elif event.keyval == Gdk.KEY_Down and (event.state & Gdk.ModifierType.CONTROL_MASK):
+        ClockWindow.deduct_time(clockWin, dt.timedelta(minutes=1))
 
 
 def undoBWColor(X):
