@@ -68,10 +68,17 @@ class ClockWindow:
 
         self.timetext.set_markup(
             "Current Time:\n<span size='98000'>" + strftime('%H:%M') + "</span>")
-        self.remainstext.set_markup("Time Remaining:\n<span size='98000' color='" + self.countDownColour + "'>" + '{0:02d}'.format(
-            self.timeRemains.seconds // 3600) + ':' + '{0:02d}'.format((self.timeRemains.seconds // 60) % 60) + "</span>")
-        self.progressbar.set_fraction(
-            self.timeRemains.seconds / self.originalDuration.seconds)
+
+        if self.timeRemains <= dt.timedelta(seconds=60):
+            self.remainstext.set_markup("Time Remaining:\n<span size='98000' color='" +
+                                        self.countDownColour + "'>" + '{0:02d}'.format(self.timeRemains.seconds) + " s</span>")
+            self.progressbar.set_fraction(
+                self.timeRemains.seconds / self.originalDuration.seconds)
+        else:
+            self.remainstext.set_markup("Time Remaining:\n<span size='98000' color='" + self.countDownColour + "'>" + '{0:02d}'.format(
+                self.timeRemains.seconds // 3600) + ':' + '{0:02d}'.format((self.timeRemains.seconds // 60) % 60) + "</span>")
+            self.progressbar.set_fraction(
+                self.timeRemains.seconds / self.originalDuration.seconds)
 
         # Return True so that it continues to get called
         return True
