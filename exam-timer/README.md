@@ -10,9 +10,9 @@ optional arguments:
 ```
 
 ## Key bindings:
-  **Space** - Toggle pause.
-  **c** - Toggle black and white-high contrast mode.
-  **CTRL + ←** Add 1 s to clock
-  **CTRL + →** Deduct 1 s from clock
-  **CTRL + ↑** Add 1 m to clock
-  **CTRL + ↓** Deduct 1 m from clock
+  * **Space** - Toggle pause.
+  * **c** - Toggle black and white-high contrast mode.
+  * **CTRL + ←** Add 1 s to clock
+  * **CTRL + →** Deduct 1 s from clock
+  * **CTRL + ↑** Add 1 m to clock
+  * **CTRL + ↓** Deduct 1 m from clock
