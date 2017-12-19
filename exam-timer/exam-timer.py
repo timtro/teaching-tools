@@ -20,7 +20,6 @@ class State(Enum):
 
 
 class ClockWindow:
-
     def __init__(self, duration):
 
         self.timeRemains = duration
@@ -65,19 +64,24 @@ class ClockWindow:
                 self.timeRemains -= now - self.timeOfLastCall
                 self.timeOfLastCall = now
 
-        self.timetext.set_markup(
-            "Current Time:\n<span size='98000'>" + strftime('%H:%M') + "</span>")
+        self.timetext.set_markup("Current Time:\n<span size='98000'>" +
+                                 strftime('%H:%M') + "</span>")
 
         if self.timeRemains <= dt.timedelta(seconds=60):
-            self.remainstext.set_markup("Time Remaining:\n<span size='98000' color='" +
-                                        self.countDownColour + "'>" + '{0:02d}'.format(self.timeRemains.seconds) + " s</span>")
-            self.progressbar.set_fraction(
-                self.timeRemains.seconds / self.originalDuration.seconds)
+            self.remainstext.set_markup(
+                "Time Remaining:\n<span size='98000' color='" +
+                self.countDownColour + "'>" + '{0:02d}'.format(
+                    self.timeRemains.seconds) + " s</span>")
+            self.progressbar.set_fraction(self.timeRemains.seconds /
+                                          self.originalDuration.seconds)
         else:
-            self.remainstext.set_markup("Time Remaining:\n<span size='98000' color='" + self.countDownColour + "'>" + '{0:02d}'.format(
-                self.timeRemains.seconds // 3600) + ':' + '{0:02d}'.format((self.timeRemains.seconds // 60) % 60) + "</span>")
-            self.progressbar.set_fraction(
-                self.timeRemains.seconds / self.originalDuration.seconds)
+            self.remainstext.set_markup(
+                "Time Remaining:\n<span size='98000' color='" +
+                self.countDownColour + "'>" + '{0:02d}'.format(
+                    self.timeRemains.seconds // 3600) + ':' + '{0:02d}'.format(
+                        (self.timeRemains.seconds // 60) % 60) + "</span>")
+            self.progressbar.set_fraction(self.timeRemains.seconds /
+                                          self.originalDuration.seconds)
 
         # Return True so that it continues to get called
         return True
@@ -104,12 +108,12 @@ class ClockWindow:
             self.remainstext.modify_fg(Gtk.StateFlags.NORMAL, None)
             self.win.override_background_color(Gtk.StateFlags.NORMAL, None)
         else:
-            self.timetext.modify_fg(
-                Gtk.StateFlags.NORMAL, Gdk.color_parse("white"))
-            self.remainstext.modify_fg(
-                Gtk.StateFlags.NORMAL, Gdk.color_parse("white"))
-            self.win.override_background_color(
-                Gtk.StateFlags.NORMAL, Gdk.RGBA(0.0, 0.0, 0.0, 1.0))
+            self.timetext.modify_fg(Gtk.StateFlags.NORMAL,
+                                    Gdk.color_parse("white"))
+            self.remainstext.modify_fg(Gtk.StateFlags.NORMAL,
+                                       Gdk.color_parse("white"))
+            self.win.override_background_color(Gtk.StateFlags.NORMAL,
+                                               Gdk.RGBA(0.0, 0.0, 0.0, 1.0))
             self.BW = True
 
     def add_time(self, delta):
@@ -129,13 +133,17 @@ def on_key_press_event(widget, event):
         ClockWindow.toggle_black_and_white(clockWin)
     elif event.keyval == Gdk.KEY_space:
         ClockWindow.toggle_pause(clockWin)
-    elif event.keyval == Gdk.KEY_Left and (event.state & Gdk.ModifierType.CONTROL_MASK):
+    elif event.keyval == Gdk.KEY_Left and (event.state &
+                                           Gdk.ModifierType.CONTROL_MASK):
         ClockWindow.add_time(clockWin, dt.timedelta(seconds=1))
-    elif event.keyval == Gdk.KEY_Right and (event.state & Gdk.ModifierType.CONTROL_MASK):
+    elif event.keyval == Gdk.KEY_Right and (event.state &
+                                            Gdk.ModifierType.CONTROL_MASK):
         ClockWindow.deduct_time(clockWin, dt.timedelta(seconds=1))
-    elif event.keyval == Gdk.KEY_Up and (event.state & Gdk.ModifierType.CONTROL_MASK):
+    elif event.keyval == Gdk.KEY_Up and (event.state &
+                                         Gdk.ModifierType.CONTROL_MASK):
         ClockWindow.add_time(clockWin, dt.timedelta(minutes=1))
-    elif event.keyval == Gdk.KEY_Down and (event.state & Gdk.ModifierType.CONTROL_MASK):
+    elif event.keyval == Gdk.KEY_Down and (event.state &
+                                           Gdk.ModifierType.CONTROL_MASK):
         ClockWindow.deduct_time(clockWin, dt.timedelta(minutes=1))
 
 
@@ -147,9 +155,10 @@ def undoBWColor(X):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
-        description='A simple timer to be projected on screen during an academic examination.')
-    parser.add_argument('-m', '--mins', type=int,
-                        help='Exam duration in minutes.')
+        description='A simple timer to be projected on screen during an academic examination.'
+    )
+    parser.add_argument(
+        '-m', '--mins', type=int, help='Exam duration in minutes.')
     args = parser.parse_args()
 
     # now = dt.datetime.now()

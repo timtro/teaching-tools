@@ -1,6 +1,4 @@
-
 class TeXPlaceCardFile:
-
     def __init__(self, filename, eventName):
         self.fd = open(filename, 'w')
         self.eventName = eventName
@@ -14,7 +12,8 @@ class TeXPlaceCardFile:
         self.fd.close()
 
     def start_placecard_tex(self):
-        self.fd.write(r'''\documentclass[letterpaper,oneside]{article}
+        self.fd.write(
+            r'''\documentclass[letterpaper,oneside]{article}
         %\usepackage{luatextra}
         \usepackage{graphicx}
         \usepackage{tikz}
@@ -63,7 +62,7 @@ class TeXPlaceCardFile:
             \sffamily\large%
             \includegraphics[width=1.5in]{/home/timtro/Documents/logos/UOIT_black_noTM}\hskip5mm\vrule\hskip5mm\hfill%
             \resizebox{3.1in}{!}{\vbox{\huge ''' + self.eventName +
-                      r'''\\ Seating Assignment}}\hbox to0.25in{}\\[2cm]\begin{tabular}{lcl}
+            r'''\\ Seating Assignment}}\hbox to0.25in{}\\[2cm]\begin{tabular}{lcl}
             {\Large Name} &:&{\LARGE\bfseries #1},\hskip1cm {\LARGE #2}\\[2mm]
             {\Large Student ID} &:& {\bfseries\LARGE #3}\\
             \end{tabular}

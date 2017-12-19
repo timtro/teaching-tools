@@ -19,12 +19,15 @@ def main(csvFiles, outfile, index=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description='Plot a histogram from a column of a csv file.')
-    parser.add_argument('csvFiles', nargs='+', metavar='PATHS',
-                        help='Path to CSV file')
-    parser.add_argument('csvOutput', metavar='PATH',
-                        help='Path to combined CSV file output')
-    parser.add_argument('-i', '--index', default="Username",
-                        help='Index column name. (Must be same in all files.)')
+    parser.add_argument(
+        'csvFiles', nargs='+', metavar='PATHS', help='Path to CSV file')
+    parser.add_argument(
+        'csvOutput', metavar='PATH', help='Path to combined CSV file output')
+    parser.add_argument(
+        '-i',
+        '--index',
+        default="Username",
+        help='Index column name. (Must be same in all files.)')
     args = parser.parse_args()
 
     main(args.csvFiles, args.csvOutput, args.index)

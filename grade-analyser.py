@@ -63,14 +63,18 @@ def fit_normal(data, colour='k', scalef=1):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description='Plot a histogram from a column of a csv file.')
-    parser.add_argument('csvFilename', metavar='PATH',
-                        help='Path to CSV file')
-    parser.add_argument('colName', metavar='COLUMN',
-                        help='Name of column to plot in CSV file')
-    parser.add_argument('-b', '--bins', type=int,
-                        help='Number of bins in histogram')
-    parser.add_argument('-r', '--range', type=int, nargs=2,
-                        metavar='RNG', help='Minimum and maximum for bins.')
+    parser.add_argument('csvFilename', metavar='PATH', help='Path to CSV file')
+    parser.add_argument(
+        'colName', metavar='COLUMN', help='Name of column to plot in CSV file')
+    parser.add_argument(
+        '-b', '--bins', type=int, help='Number of bins in histogram')
+    parser.add_argument(
+        '-r',
+        '--range',
+        type=int,
+        nargs=2,
+        metavar='RNG',
+        help='Minimum and maximum for bins.')
     args = parser.parse_args()
 
     main(args.csvFilename, args.colName, args.bins, args.range)
