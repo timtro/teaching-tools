@@ -79,12 +79,35 @@ class TeXPlaceCardFile:
             \end{minipage}
         }
 
+        \newcommand{\blankplacecard}[1]{
+            \begin{minipage}[t][0.5\textwidth-10mm][t]{.5\textheight-10mm}
+            \vskip1mm
+            \sffamily\large%
+            \includegraphics[width=1.5in]{/home/timtro/Documents/logos/UOIT_black_noTM}\hskip5mm\vrule\hskip5mm\hfill%
+            \resizebox{3.1in}{!}{\vbox{\huge ''' + self.eventName +
+            r'''\\ Seating Assignment}}\hbox to0.25in{}\\[2cm]\begin{tabular}{lcl}
+            {\Large Name} &:&{\hrulefill}\\[15mm]
+            {\Large Student ID} &:& {\hrulefill}\\
+            \end{tabular}
+            %Course Code:\ \hrulefill\hbox to2in{}\vfill
+            %CRN:\ \hrulefill\hbox to2in{}\vfill
+            \vfill
+            Date:\ \hrulefill\hbox to1.75in{}\vfill
+            Signature:\ \hrulefill\hbox to1.75in{}\vskip-3mm
+            % \vbox to 1cm{}
+            \begin{tikzpicture}[overlay]
+                \node [block] (seatno) at (11.33cm, 1.8cm) {\Huge #1};
+                \node [above of=seatno, node distance=2cm] {\small Seat Number.};
+            \end{tikzpicture}
+            \end{minipage}
+        }
+
         \setlength{\parskip}{0pt}
         \setlength{\parindent}{0pt}
         \setlength{\fboxsep}{0pt}
         \begin{document}''')
 
-    def print_placecard(self, fourIdxsAndSeries):
+    def print_placecard_sheet(self, fourIdxsAndSeries):
 
         assert len(fourIdxsAndSeries) == 4
         (d1, d2, d3, d4) = fourIdxsAndSeries
@@ -98,9 +121,9 @@ class TeXPlaceCardFile:
         self.fd.write('{' + str(d1[0]) + '}')
         self.fd.write('{' + str(d1[1]['Seat Number']) + '}')
         self.fd.write(r'''%
-            \end{sideways}\hfill\null\hfill%
-            \begin{sideways}%
-            \placecard''')
+        \end{sideways}\hfill\null\hfill%
+        \begin{sideways}%
+        \placecard''')
         self.fd.write('{' + d2[1]['Last Name'] + '}')
         self.fd.write('{' + d2[1]['First Name'] + '}')
         self.fd.write('{' + str(d2[0]) + '}')
@@ -123,6 +146,36 @@ class TeXPlaceCardFile:
         self.fd.write('{' + d4[1]['First Name'] + '}')
         self.fd.write('{' + str(d4[0]) + '}')
         self.fd.write('{' + str(d4[1]['Seat Number']) + '}')
+        self.fd.write(r'''%
+        \end{sideways}\hfill\null%
+        \vfill\null
+        \clearpage''')
+
+
+    def print_blank_placecard_sheet(self, fourRand):
+
+        self.fd.write(r'''\null\vfill%
+        \hfill%
+        \begin{sideways}%
+        \blankplacecard''')
+        self.fd.write('{' + str(fourRand[0]) + '}')
+        self.fd.write(r'''%
+        \end{sideways}\hfill\null\hfill%
+        \begin{sideways}%
+        \blankplacecard''')
+        self.fd.write('{' + str(fourRand[1]) + '}')
+        self.fd.write(r'''%
+        \end{sideways}\hfill\null%
+        \vfill\null\vfill%
+        \hfill%
+        \begin{sideways}%
+        \blankplacecard''')
+        self.fd.write('{' + str(fourRand[2]) + '}')
+        self.fd.write(r'''%
+        \end{sideways}\hfill\null\hfill%
+        \begin{sideways}%
+        \blankplacecard''')
+        self.fd.write('{' + str(fourRand[3]) + '}')
         self.fd.write(r'''%
         \end{sideways}\hfill\null%
         \vfill\null
